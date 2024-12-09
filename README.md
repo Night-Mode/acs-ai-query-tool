@@ -25,7 +25,7 @@ I’ve developed a solution to bridge the gap between the ACS’s complexity and
 ## Example Query:
 
 **Count of Service Workers Walking to Work in Michigan**  
-ACS API Example: https://api.census.gov/data/2022/acs/acs5?get=NAME,B08124_031E&for=place:26
+ACS API Example: https://api.census.gov/data/2022/acs/acs5?get=NAME,B08124_031E&for=state:26
 
 ---
 

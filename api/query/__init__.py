@@ -753,6 +753,7 @@ def rename_api_labels_with_llm(user_query, api_codes_df, client):
     - Ensure the names are intuitive and related to the data described in the label.
     - Consider the context of the user's query to make the labels more relevant.
     - Be careful when renaming the Total Population label. This can confuse the total population with demographic population and lead to inaccurate results.
+    - Avoid using the word 'Estimate'
 
     API Codes Details:
     {', '.join([f"Code: {item['name']}, Label: {item['label']}, Concept: {item['concept']}, Category: {item['category']}" for item in api_codes_descriptions])}

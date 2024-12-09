@@ -22,7 +22,7 @@ function App() {
   const [chatLog, setChatLog] = useState([]); // Stores all chat messages
   const [results, setResults] = useState([]); // Stores result data for display in the result section
   const [isLoading, setIsLoading] = useState(false); // Tracks API call status
-  const chatEndRef = useRef(null); // Ref for the bottom of the chat log
+  const chatEndRef = useRef(null); // Ref for the bottom of the chat log.
 
 // Scroll to the bottom of the chat window when chatLog changes
 useEffect(() => {

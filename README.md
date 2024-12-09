@@ -4,6 +4,9 @@
 
 For the full documentation, please visit the [project homepage.](https://michaelminzey.com/acs-query)
 
+## [Access the ACS AI Query Tool here](https://victorious-stone-01080ed10.4.azurestaticapps.net/)
+
+
 The American Community Survey (ACS) is a vital resource from the U.S. Census Bureau, providing detailed demographic, economic, and housing data. Its insights are invaluable for social and healthcare researchers, especially as social determinants of health—factors like income, education, and housing—are increasingly integrated into clinical studies.
 
 Despite its value, the ACS dataset’s size—over 20,000 variables—makes it difficult to navigate. Existing tools, like the ACS API, require technical expertise, creating a barrier for non-technical users who could benefit from this data. Simplifying access to ACS data is essential to empower broader use in public health, social policy, and evidence-based decision-making.

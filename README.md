@@ -2,7 +2,10 @@
 
 ## The Power and Complexity of the American Community Survey (ACS)
 
-For the full documention, please visit the [project homepage.](https://michaelminzey.com/acs-query)
+For the full documentation, please visit the [project homepage.](https://michaelminzey.com/acs-query)
+
+## [Access the ACS AI Query Tool here](https://victorious-stone-01080ed10.4.azurestaticapps.net/)
+
 
 The American Community Survey (ACS) is a vital resource from the U.S. Census Bureau, providing detailed demographic, economic, and housing data. Its insights are invaluable for social and healthcare researchers, especially as social determinants of health—factors like income, education, and housing—are increasingly integrated into clinical studies.
 
@@ -22,7 +25,7 @@ I’ve developed a solution to bridge the gap between the ACS’s complexity and
 ## Example Query:
 
 **Count of Service Workers Walking to Work in Michigan**  
-[ACS API Example](https://api.census.gov/data/2022/acs/acs5?get=NAME,B08124_031E&for=place:26)
+ACS API Example: https://api.census.gov/data/2022/acs/acs5?get=NAME,B08124_031E&for=state:26
 
 ---
 

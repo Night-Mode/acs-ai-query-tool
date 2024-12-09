@@ -1,0 +1,16 @@
+{
+  "$schema": "https://aka.ms/azure/static-web-apps-cli/schema",
+  "configurations": {
+    "inquery": {
+      "appLocation": ".",
+      "apiLocation": "api",
+      "outputLocation": "build",
+      "dataApiLocation": "swa-db-connections",
+      "apiLanguage": "python",
+      "apiVersion": "3.8",
+      "appBuildCommand": "npm run build",
+      "run": "npm start",
+      "appDevserverUrl": "http://localhost:3000"
+    }
+  }
+}

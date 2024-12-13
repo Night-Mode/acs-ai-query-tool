@@ -617,7 +617,7 @@ def query_api_table(categories, keywords, conn):
 
     return pd.DataFrame(results_list, columns=columns)
 
-def filter_api_codes_with_llm(client, user_query, api_codes_df, gpt_model):
+def filter_api_codes_with_llm(client, gpt_model, user_query, api_codes_df):
     """
     Filters API codes based on relevance to the user's query using an LLM.
 
@@ -698,7 +698,7 @@ def chunk_dataframe(df, chunk_size):
     return [df.iloc[i:i + chunk_size] for i in range(0, len(df), chunk_size)]
 
 
-def recursive_filter_api_codes(user_query, api_codes_df, client, chunk_size=300, max_final_size=30):
+def recursive_filter_api_codes(user_query, api_codes_df, client, gpt_model, chunk_size=300, max_final_size=30):
     """
     Improved recursive filtering of API codes using an LLM.
     """
@@ -712,7 +712,7 @@ def recursive_filter_api_codes(user_query, api_codes_df, client, chunk_size=300,
     filtered_dfs = []
 
     for i, chunk in enumerate(chunks):
-        filtered_chunk = filter_api_codes_with_llm(client, user_query, chunk)
+        filtered_chunk = filter_api_codes_with_llm(client, gpt_model, user_query, chunk)
         
         if not filtered_chunk.empty:
             filtered_dfs.append(filtered_chunk)
@@ -726,7 +726,7 @@ def recursive_filter_api_codes(user_query, api_codes_df, client, chunk_size=300,
         return pd.DataFrame()  # Return an empty DataFrame if no matches
 
     # Recurse to refine further if the combined result is still too large
-    return recursive_filter_api_codes(user_query, filtered_combined_df, client, chunk_size, max_final_size)
+    return recursive_filter_api_codes(user_query, filtered_combined_df, client, gpt_model, chunk_size, max_final_size)
 
 
 def rename_api_labels_with_llm(user_query, api_codes_df, client, gpt_model):
@@ -1076,7 +1076,7 @@ def remove_redundant_rows(df):
 
 
 # Application Workflow
-def process_query(user_query, conn, client):
+def process_query(user_query, conn, client, gpt_model):
     """
     Processes a user query and returns a standardized response message.
     Steps:
@@ -1093,7 +1093,7 @@ def process_query(user_query, conn, client):
  
     try:
         # ---- Validate the query using the LLM
-        validation_result = validate_query_with_llm(user_query, client)
+        validation_result = validate_query_with_llm(user_query, client, gpt_model)
         
         # Handle different statuses
         if validation_result["status"] == "pass":
@@ -1113,7 +1113,7 @@ def process_query(user_query, conn, client):
             }
 
         # ----  Extract locations and other data
-        classify_result = classify_query_with_llm(user_query, client)
+        classify_result = classify_query_with_llm(user_query, client, gpt_model)
         locations = classify_result['locations']
         keywords_user = classify_result['keywords']
         
@@ -1165,7 +1165,7 @@ def process_query(user_query, conn, client):
       
         # First, determine the best categories. Combine the LLM determined categories and user query determined categories
         
-        categories_db_result = get_categories(user_query, client)
+        categories_db_result = get_categories(user_query, client, gpt_model)
         categories_combined = categories_db_result['categories']
       
         keywords_combined = get_combined_keywords(keywords_user, conn)
@@ -1174,7 +1174,7 @@ def process_query(user_query, conn, client):
 
         api_final_list = recursive_filter_api_codes(user_query, api_candidates, client)
 
-        api_friendly = rename_api_labels_with_llm(user_query, api_final_list, client)
+        api_friendly = rename_api_labels_with_llm(user_query, api_final_list, client, gpt_model)
         api_codes = api_friendly['name'].tolist()
 
         # ---- Build API calls
@@ -1194,7 +1194,7 @@ def process_query(user_query, conn, client):
         pivoted_df = update_dataframe_columns(concat_df, api_friendly, locations_final)
         
         # ---- Generate result title and return structured data
-        result_title = generate_result_title(user_query, client)
+        result_title = generate_result_title(user_query, client, gpt_model)
 
         # Add commas to the numbers
         final_df = prep_results(pivoted_df)

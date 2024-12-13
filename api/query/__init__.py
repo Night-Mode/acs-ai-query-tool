@@ -50,7 +50,7 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
         if test_connection_response == "Database connection successful.":
             if user_query:
                 # Process query and return a DataFrame
-                result = process_query(user_query, conn, client)
+                result = process_query(user_query, conn, client, gpt_model)
 
                 if result["status"] == "success":
                     # Serialize the DataFrame to JSON

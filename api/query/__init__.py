@@ -200,7 +200,7 @@ def validate_query_with_llm(query, client):
     try:
         # Call the LLM to validate the query
         validation_response = client.chat.completions.create(
-            model="gpt-4o-mini",
+            model="o1-mini",
             messages=[
                 {"role": "system", "content": "You are an intelligent query validator for ACS data."},
                 {"role": "user", "content": prompt}
@@ -230,7 +230,7 @@ def validate_query_with_llm(query, client):
             """
             try:
                 refinement_response = client.chat.completions.create(
-                    model="gpt-4o-mini",
+                    model="o1-mini",
                     messages=[
                         {"role": "system", "content": "You are an assistant designed to refine invalid queries for ACS data."},
                         {"role": "user", "content": refinement_prompt}
@@ -319,7 +319,7 @@ def classify_query_with_llm(query, client):
         """
         # Call OpenAI's ChatCompletion API
         response = client.chat.completions.create(
-            model="gpt-4o-mini",
+            model="o1-mini",
             messages=[
                 {"role": "system", "content": "You are a helpful assistant."},
                 {"role": "user", "content": prompt}
@@ -456,7 +456,7 @@ def get_categories(user_query, client):
     # Call the OpenAI API
     try:
         response = client.chat.completions.create(
-            model="gpt-4o-mini",
+            model="o1-mini",
             messages=[
                 {"role": "system", "content": "You are an assistant specialized in ACS data analysis."},
                 {"role": "user", "content": prompt}
@@ -563,7 +563,7 @@ def validate_keywords_with_llm(user_query, combined_keywords, client):
     # Call the OpenAI API
     try:
         response = client.chat.completions.create(
-            model="gpt-4o-mini",
+            model="o1-mini",
             messages=[{"role": "system", "content": "You are a helpful assistant."},
                       {"role": "user", "content": prompt}],
         )
@@ -652,7 +652,7 @@ def filter_api_codes_with_llm(client, user_query, api_codes_df):
     try:
         # Call the OpenAI API
         response = client.chat.completions.create(
-            model="gpt-4o-mini",
+            model="o1-mini",
             messages=[
                 {"role": "system", "content": "You are an assistant trained to analyze and filter API codes based on relevance."},
                 {"role": "user", "content": prompt},
@@ -775,7 +775,7 @@ def rename_api_labels_with_llm(user_query, api_codes_df, client):
     try:
         # Call the OpenAI API
         response = client.chat.completions.create(
-            model="gpt-4o-mini",
+            model="o1-mini",
             messages=[
                 {"role": "system", "content": "You are a helpful assistant that renames API labels to concise and user-friendly names."},
                 {"role": "user", "content": prompt},
@@ -997,7 +997,7 @@ def generate_result_title(user_query, client):
     """
     try:
         response = client.chat.completions.create(
-            model="gpt-4o-mini",
+            model="o1-mini",
             messages=[
                 {"role": "system", "content": "You are a helpful assistant."},
                 {"role": "user", "content": prompt}

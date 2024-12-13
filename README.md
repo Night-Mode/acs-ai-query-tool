@@ -6,6 +6,7 @@ For the full documentation, please visit the [project homepage.](https://michael
 
 ## [Access the ACS AI Query Tool here](https://victorious-stone-01080ed10.4.azurestaticapps.net/)
 
+12/13/2024 - Update to gpt-4o1-mini model
 
 The American Community Survey (ACS) is a vital resource from the U.S. Census Bureau, providing detailed demographic, economic, and housing data. Its insights are invaluable for social and healthcare researchers, especially as social determinants of health—factors like income, education, and housing—are increasingly integrated into clinical studies.
 

@@ -1172,7 +1172,7 @@ def process_query(user_query, conn, client, gpt_model):
 
         api_candidates = query_api_table(categories_combined, keywords_combined, conn)
 
-        api_final_list = recursive_filter_api_codes(user_query, api_candidates, client)
+        api_final_list = recursive_filter_api_codes(user_query, api_candidates, client, gpt_model)
 
         api_friendly = rename_api_labels_with_llm(user_query, api_final_list, client, gpt_model)
         api_codes = api_friendly['name'].tolist()
